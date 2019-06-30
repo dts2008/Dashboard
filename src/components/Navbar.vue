@@ -7,6 +7,27 @@
                 <span class="font-weight-light">MATERIAL DESIGN</span>
         </v-toolbar-title>
         <v-spacer></v-spacer>
+
+        <v-menu offset-y>
+            <template v-slot:activator="{ on }">
+                <v-btn flat v-on="on" color="grey">
+                    <v-icon left>
+                        expand_more
+                    </v-icon>
+                    <span>
+                        Menu    
+                    </span>
+                </v-btn>
+            </template>
+            <v-list>
+                <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+                    <v-list-tile-title>
+                        {{ link.text }}
+                    </v-list-tile-title>
+                </v-list-tile>
+            </v-list>
+        </v-menu>
+
         <v-btn flat color="gray">
             <v-icon right>exit_to_app</v-icon>
             <span>Sign Out</span>
@@ -14,6 +35,19 @@
         </v-toolbar>
 
         <v-navigation-drawer v-model="drawer" app class="grey">
+            <v-layout column align-center>
+                <v-flex class="mt-5">
+                    <v-avatar size="100">
+                        <img src="/avatar-1.png" alt="">
+                    </v-avatar>
+                    <p class="white--text subheading mt-1">
+                            The Net Ninja
+                        </p>
+                </v-flex>
+                <v-flex class="mt-4 mb-3">
+                    <Popup />
+                </v-flex>
+            </v-layout>
             <v-list>
                 <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
                     <v-list-tile-action>
@@ -30,7 +64,12 @@
 
 
 <script>
+import Popup from "./Popup"
+
 export default {
+    components: {
+        Popup
+    },
     data(){
         return {
             drawer : true,
