@@ -15,12 +15,12 @@
             <div class="subheading">{{person.name}}</div>
             <div class="grey--text">{{person.role}}</div>
           </v-card-text>
-          <v-card-action>
+          <v-card-actions>
             <v-btn flat color="grey">
               <v-icon small left>message</v-icon>
               <span>message</span>
             </v-btn>
-          </v-card-action>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

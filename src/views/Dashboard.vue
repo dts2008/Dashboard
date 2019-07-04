@@ -52,7 +52,10 @@
 </template>
 
 <script>
-import db from "@/fb"
+//import db from "@/fb"
+//
+//import tools, {FillProjects} from '@/common/tools'
+import tools from '@/common/tools'
   
 export default 
 {
@@ -68,28 +71,29 @@ export default
     }
   },
   created() {
-    db.collection('projects').onSnapshot(res =>
-    {
-        const changes = res.docChanges();
+    tools.FillProjects(this.projects);
+    // db.collection('projects').onSnapshot(res =>
+    // {
+    //     const changes = res.docChanges();
 
-        changes.forEach(change => {
-        if (change.type === 'added') {
-          this.projects.push(
-            {
-            ...change.doc.data(),
-            id: change.doc.id
-            }
-          );
-        }
-        if (change.type === 'modified') {
-          console.log('Modified city: ', change.doc.data());
-        }
-        if (change.type === 'removed') {
-          console.log('Removed city: ', change.doc.data());
-        }
-    });
+    //     changes.forEach(change => {
+    //     if (change.type === 'added') {
+    //       this.projects.push(
+    //         {
+    //         ...change.doc.data(),
+    //         id: change.doc.id
+    //         }
+    //       );
+    //     }
+    //     if (change.type === 'modified') {
+    //       console.log('Modified city: ', change.doc.data());
+    //     }
+    //     if (change.type === 'removed') {
+    //       console.log('Removed city: ', change.doc.data());
+    //     }
+    // });
  
-    }); 
+    //}); 
   }
 }
 

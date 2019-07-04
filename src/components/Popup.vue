@@ -28,7 +28,7 @@
 
 <script>
 import format from 'date-fns/format'
-import db from '@/fb'
+import db from '@/common/fb'
 
 export default {
     data(){
@@ -53,7 +53,7 @@ export default {
                 const project = {
                     title : this.title,
                     content : this.content,
-                    due : format(this.due, 'Do MMM YYY'),
+                    due : this.formattedDate,//format(this.due, 'Do MMM YYY'),
                     person: 'The Net Ninja',
                     status: 'ongoing'         
                 }
@@ -69,6 +69,7 @@ export default {
             }
         }
     },
+    // property
     computed:
     {
         formattedDate(){
