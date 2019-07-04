@@ -52,16 +52,13 @@
 </template>
 
 <script>
+import db from "@/fb"
   
 export default 
 {
   data () {
     return {
       projects: [
-        { title: "test001", person: "person09", due: "2019-06-25", status: "ongoing"},
-        { title: "test003", person: "person05", due: "2019-06-26", status: "ongoing"},
-        { title: "test007", person: "person03", due: "2019-06-27", status: "complete"},
-        { title: "test004", person: "person04", due: "2019-06-28", status: "overdue"}
       ]
     }
   },
@@ -69,6 +66,30 @@ export default
     sortBy(prop){
       this.projects.sort((a,b) => a[prop] < b[prop] ? -1 : 1)
     }
+  },
+  created() {
+    db.collection('projects').onSnapshot(res =>
+    {
+        const changes = res.docChanges();
+
+        changes.forEach(change => {
+        if (change.type === 'added') {
+          this.projects.push(
+            {
+            ...change.doc.data(),
+            id: change.doc.id
+            }
+          );
+        }
+        if (change.type === 'modified') {
+          console.log('Modified city: ', change.doc.data());
+        }
+        if (change.type === 'removed') {
+          console.log('Removed city: ', change.doc.data());
+        }
+    });
+ 
+    }); 
   }
 }
 

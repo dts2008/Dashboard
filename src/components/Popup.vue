@@ -55,12 +55,14 @@ export default {
                     content : this.content,
                     due : format(this.due, 'Do MMM YYY'),
                     person: 'The Net Ninja',
-                    state: 'ongoing'         
+                    status: 'ongoing'         
                 }
 
                 db.collection('projects').add(project).then(() => {
                     this.loading = false;
                     this.dialogState = false;
+
+                    this.$emit('projectAdded');
                     //console.log('Added to DB');
                 });
                 

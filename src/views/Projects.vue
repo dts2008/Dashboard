@@ -22,15 +22,12 @@
 
 
 <script>
+import db from "@/fb"
+
 export default {
   data() {
     return {
        projects: [
-        { title: "test001", person: "person09", due: "2019-06-25", status: "ongoing"},
-        { title: "test003", person: "person05", due: "2019-06-26", status: "ongoing"},
-        { title: "test007", person: "person03", due: "2019-06-27", status: "complete"},
-        { title: "test004", person: "person04", due: "2019-06-28", status: "overdue"},
-        { title: "test004", person: "person09", due: "2019-06-28", status: "overdue"}
       ]
     }
   },
@@ -38,9 +35,27 @@ export default {
   {
     myProject(){
       return this.projects.filter(project => {
-        return project.person === "person09"
+        return project.person === "The Net Ninja"
       })
     }
+  },
+  created() {
+    db.collection('projects').onSnapshot(res =>
+    {
+        const changes = res.docChanges();
+
+        changes.forEach(change => {
+        if (change.type === 'added') {
+          this.projects.push(
+            {
+            ...change.doc.data(),
+            id: change.doc.id
+            }
+          );
+        }
+    });
+ 
+    }); 
   }
 }
 </script>
