@@ -56,7 +56,7 @@
             </v-list>
         </v-menu>
 
-        <v-btn flat color="gray">
+        <v-btn flat color="gray" @click="logout">
             <v-icon right>exit_to_app</v-icon>
             <span>Sign Out</span>
         </v-btn>
@@ -94,6 +94,9 @@
 <script>
 import Popup from "./Popup"
 import { languages, changeLocale } from '@/i18n'
+
+//import App from "@/App"
+import app from '@/main'
 // import { languages } from '@/messages/language'
 // import { changeLocale } from '@/plugins/i18n'
 
@@ -108,6 +111,7 @@ export default {
                 { icon: "dashboard", text: "Dashboard", route: "/"},
                 { icon: "folder", text: "My Project", route: "/projects"},
                 { icon: "person", text: "Team", route: "/team"},
+                { icon: "person", text: "Login", route: "/login"},
             ],
             snackbar: false,
             languages,
@@ -129,6 +133,11 @@ export default {
             // localStorage.lang = lang;
             // this.$i18n.locale = lang;
             // // window.t = this;
+        },
+        logout()
+        {
+            //console.log(app);
+            app.logout();
         }
     }
 }

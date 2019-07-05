@@ -15,7 +15,7 @@ export function FillProjects(projects) {
             }
         });
     })
-};
+}
 
 export default {
      FillProjects,

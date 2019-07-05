@@ -8,8 +8,11 @@ import router from './router'
 Vue.config.productionTip = false
 
 
-new Vue({
+const vue = new Vue({
   i18n,
   router,
   render: h => h(App)
 }).$mount('#app')
+
+
+export default vue.$children[0];
